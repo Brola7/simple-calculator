@@ -19,7 +19,7 @@ const decimal = document.querySelector("#decimal");
 const percent = document.querySelector("#percent");
 const screen = document.querySelector("#screen");
 let a = "0", b;
-let bool = false, signBool = false;
+let bool = false, signBool = false, decimalBool = false;
 let num1 = 0, num2 = 0, operator = "0";
 screen.textContent = a;
 one.addEventListener("click", ()=> {
@@ -192,32 +192,44 @@ AC.addEventListener("click", ()=> {
     clear();
 })
 plus.addEventListener("click", () => {
-    operator = "+";
-    screen.textContent = operator;
-    a = "0";
-    b = "0";
-    bool = false;
+    if(operator === "0"){
+        operator = "+";
+        screen.textContent = operator;
+        a = "0";
+        b = "0";
+        bool = false;
+        decimalBool = false
+    }
 })
 minus.addEventListener("click", () => {
-    operator = "-";
-    screen.textContent = operator;
-    a = "0";
-    b = "0";
-    bool = false;
+    if(operator === "0"){
+        operator = "-";
+        screen.textContent = operator;
+        a = "0";
+        b = "0";
+        bool = false;
+        decimalBool = false
+    }
 })
 times.addEventListener("click", () => {
-    operator = "*";
-    screen.textContent = operator;
-    a = "0";
-    b = "0";
-    bool = false;
+    if(operator === "0"){
+        operator = "*";
+        screen.textContent = operator;
+        a = "0";
+        b = "0";
+        bool = false;
+        decimalBool = false
+    }
 })
 division.addEventListener("click", () => {
-    operator = "/";
-    screen.textContent = operator;
-    a = "0";
-    b = "0";
-    bool = false;
+    if(operator === "0"){
+        operator = "/";
+        screen.textContent = operator;
+        a = "0";
+        b = "0";
+        bool = false;
+        decimalBool = false
+    }
 })
 equals.addEventListener("click", () => {
     if(operator !== "0" && num1 !== 0 && num2 !== 0){
@@ -253,7 +265,31 @@ sign.addEventListener("click", () => {
         num2 = 0 - num2;
     }
     screen.textContent = a;
-}) 
+})
+percent.addEventListener("click", () => {
+    if(parseFloat(a) === num1){
+        num1 /= 100;
+        a = num1.toString();
+    }else{
+        num2 /= 100;
+        a = num2.toString();
+    }
+    screen.textContent = a;
+})
+decimal.addEventListener("click", () => {
+    if(decimalBool === false){
+        if(parseFloat(a) === num1){
+            a = a.concat(".");
+            num1 = parseFloat(a);
+            screen.textContent = a;
+        }else{
+            a = a.concat(".");
+            num2 = parseFloat(a);
+            screen.textContent = a;
+        }
+    }
+    decimalBool = true;
+})
 function clear(){
     a = "0";
     b = "0";
